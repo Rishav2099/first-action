@@ -1,10 +1,14 @@
 name: FirstWorkflow
-on: workflow_dispatch
+on: 
+  push:
+    branches: [main]
 jobs:
-  first_job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Message
-        run: echo "Hello Rishav"
-      - name: Print Bye
-        run: echo "Bye Rishav"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: 
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
